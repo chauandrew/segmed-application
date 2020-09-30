@@ -1,0 +1,1 @@
+# segmed-application
