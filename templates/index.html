@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>My test page</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    <p>This is my page</p>
-  </body>
-</html>
 
+<head>
+  <meta charset="utf-8">
+  <title>Segmed Application</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container text-center p-5">
+    <h1>Segmed Application:</h1>
+    <p>Photos taken from <a target="blank" href="https://unsplash.com/">Unsplash</a>.</p>
+  </div>
+  <div class="container card-columns">
+    {% for photo in photos %}
+    <!-- photo is a 3-tuple that looks like: (id, url, flag) -->
+    {% if photo[2] %}
+    <!-- if photo is flagged, use a dark border -->
+    <div class="card border border-dark" id={{"photocard-" + photo[0]|string}}>
+      <img class="card-img-top" src={{photo[1]}} alt="yosemite picture" />
+      <div class="card-body container">
+        <button type="button" class="btn btn-dark btn-small">unflag photo</button>
+      </div>
+    </div>
+    {% else %}
+    <!-- otherwise, use standard border -->
+    <div class="card" id={{"photocard-" + photo[0]|string}}>
+      <img class="card-img-top" src={{photo[1]}} alt="yosemite picture" />
+      <div class="card-body container">
+        <button type="button" class="btn btn-dark btn-small">flag photo</button>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="/static/js/index.js"></script>
+</body>
+
+</html>
